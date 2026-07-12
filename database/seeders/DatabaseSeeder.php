@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Review;
 use App\Models\User;
+use App\Models\Site;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,9 +19,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        $sites = Site::factory()->count(3)->for($user)->create();
+
+        foreach ($sites as $site)
+        {
+            $reviews = Review::factory()->count(5)->for($site)->create();
+        }
     }
 }
