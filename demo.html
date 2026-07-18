@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тестовый чужой сайт</title>
+</head>
+<body>
+  <h1>Салон красоты «Пример»</h1>
+  <h2>Отзывы наших гостей</h2>
+  <script>
+    fetch('http://localhost/api/widget/pub_3Rf8bBsDYXdg5KD0/reviews', {
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(r => r.json())
+      .then(data => console.log('Успех:', data))
+      .catch(err => console.error('Ошибка:', err));
+  </script>
+</body>
+</html>
