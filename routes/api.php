@@ -12,5 +12,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::apiResource('sites', SiteController::class);
 });
 
-Route::get('/widget/{publicKey}/reviews', [WidgetController::class, 'reviews']);
-Route::post('/widget/{publicKey}/reviews', [WidgetController::class, 'store']);
+Route::middleware('throttle:10,1')->group(function () {
+    Route::get('/widget/{publicKey}/reviews', [WidgetController::class, 'reviews']);
+    Route::post('/widget/{publicKey}/reviews', [WidgetController::class, 'store']);
+});

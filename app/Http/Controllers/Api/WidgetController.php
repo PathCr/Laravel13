@@ -25,9 +25,12 @@ class WidgetController extends Controller
     public function store(Request $request, string $publicKey)
     {
         $site = Site::where('public_key', $publicKey)->where('is_active', true)->first();
-
         if (!$site) {
             return response()->json(['message' => 'Сайт не найден'], 404);
+        }
+
+        if ($request->filled('website')) {
+            return response()->json(['message' => 'Отзыв отправлен на модерацию'], 201);
         }
 
         $validated = $request->validate([
